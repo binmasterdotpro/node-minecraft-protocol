@@ -53,7 +53,8 @@ module.exports = function (client, options) {
         client.write('configuration_acknowledged', {})
       }
       client.state = states.CONFIGURATION
-      client.once('select_known_packs', () => {
+      client.write('settings', {locale: "en_us", viewDistance: 10, chatFlags: 0, chatColors: true, skinParts: 127, mainHand: 1, enableTextFiltering: false, enableServerListing: true})
+      client.on('select_known_packs', () => {
         client.write('select_known_packs', { packs: [] })
       })
       // Server should send finish_configuration on its own right after sending the client a dimension codec
